@@ -1,7 +1,7 @@
-// Описан в документации
 import flatpickr from 'flatpickr';
-// Дополнительный импорт стилей
 import 'flatpickr/dist/flatpickr.min.css';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const refs = {
   datePickerInput: document.querySelector('#datetime-picker'),
@@ -30,7 +30,7 @@ refs.startBtn.addEventListener('click', startTimer);
 
 function checkPastDate(selectedDate) {
   if (selectedDate[0] < currentDate) {
-    alert('Please choose a date in the future');
+    Notify.failure('Please choose a date in the future');
   }
 }
 
@@ -64,7 +64,7 @@ function startTimer() {
 
     if (timeToTargetDate <= 0) {
       clearInterval(timerID);
-      document.querySelector('.container').innerHTML = '<h1>YOU WIN</h1>';
+      Report.success('YOU WIN', 'Not to hard, hah? Lets do it again?', 'Okay');
     }
   }, 1000);
 }
